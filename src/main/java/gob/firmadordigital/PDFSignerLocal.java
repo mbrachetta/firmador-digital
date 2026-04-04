@@ -194,6 +194,7 @@ public class PDFSignerLocal extends PDFSigner {
             /* Se carga el documento firmado en la cola de documentos firmados para que el hilo
              * correspondiente se encargue de tomarlo de allí y devolverlo a la url de callback
              * definida por el organismo */
+            System.out.println("Documento firmado correctamente, se procede a convertirlo a Base64 para su envío");
             String docfirmado_base64= Base64.toBase64String(baos.toByteArray());
             /* Se Guarda localmente el documento firmado - descomentar con fines de prueba
             baos.writeTo(new FileOutputStream(PDFirma.fdefault_dir+"/doc firmado " + Math.random()+".pdf")); */
