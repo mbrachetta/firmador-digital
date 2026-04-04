@@ -57,7 +57,6 @@ public class PDFSignerLocal extends PDFSigner {
         }
     }
 
-
     public DocumentoFirmado firmarPDF(DocumentoAFirmar documentoAFirmar) {
 
         DocumentoFirmado documentoFirmado = null;
@@ -88,9 +87,6 @@ public class PDFSignerLocal extends PDFSigner {
                     true,
                     0
             );
-            System.out.println("*");
-            System.out.println(docfirmadoBase64);
-            System.out.println("*");
         } catch (ParametroIncorrectoException e) {
             synchronized (this) {
                 hilofirma.bloquear();

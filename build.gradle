@@ -13,7 +13,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    // iText
+    // iText 7.2.5 - dependencia de BouncyCastle 1.70
     implementation 'com.itextpdf:kernel:7.2.5'
     implementation 'com.itextpdf:layout:7.2.5'
     implementation 'com.itextpdf:sign:7.2.5'
