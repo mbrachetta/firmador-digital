@@ -91,7 +91,7 @@ public class ThreadFirma extends Thread {
     public ThreadFirma (Certificate [] cert, PrivateKey privkey, Image img_estampaFirma, String datos_selloFirma, WebSocketServerEndpoint wsse){
         super("ThreadFirma");
         this.wsse=wsse;
-        pdfsigner = new PDFSignerLocal(cert, privkey,img_estampaFirma,datos_selloFirma,this);
+        pdfsigner = new PDFSignerLocal(cert, privkey,img_estampaFirma,this);
     }
 
     /* Constructor para un hilo de firmas remotas */

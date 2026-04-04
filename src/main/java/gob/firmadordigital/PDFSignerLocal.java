@@ -33,16 +33,14 @@ public class PDFSignerLocal extends PDFSigner {
     
     private Certificate[] chain;
     private PrivateKey key;
-    private String digitallySignedBy;
     private Image img;
     
-    public PDFSignerLocal(Certificate[] chain,PrivateKey key,Image img_estampaFirma, String datos_selloFirma,ThreadFirma hilofirma) {
+    public PDFSignerLocal(Certificate[] chain,PrivateKey key,Image img_estampaFirma, ThreadFirma hilofirma) {
         
         super(hilofirma);
         this.chain = chain;
         this.key = key;
         this.img = img_estampaFirma;
-        this.digitallySignedBy = datos_selloFirma;
     }
 
 
@@ -89,7 +87,7 @@ public class PDFSignerLocal extends PDFSigner {
 
             Rectangle rectPage = null;
 
-            if (img != null && this.digitallySignedBy != null && !digitallySignedBy.isEmpty()){
+            if (img != null !digitallySignedBy.isEmpty()){
                 // Intentamos obtener el rectángulo de la última firma usando campos AcroForm (iText7)
                 if (ultima_firma != null) {
                     PdfAcroForm form = PdfAcroForm.getAcroForm(tmpDoc, false);
