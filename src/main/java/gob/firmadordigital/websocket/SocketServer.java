@@ -1,45 +1,43 @@
 package gob.firmadordigital.websocket;
 
 import gob.firmadordigital.PDFirma;
-
 import jakarta.websocket.DeploymentException;
-import javax.swing.JOptionPane;
 import org.glassfish.tyrus.server.Server;
+
+import javax.swing.*;
 
 public class SocketServer extends Server {
 
     public SocketServer() {
-        super("localhost", PDFirma.parametros.getWebsocketserver_port(), "/websockets",null,WebSocketServerEndpoint.class);
+        super("localhost", PDFirma.parametros.getWebsocketserver_port(), "/websockets", null, WebSocketServerEndpoint.class);
     }
-    
+
     public void runServer() {
         try {
             this.start();
             System.out.println("Se inicia Servidor de WebSocket");
-        } 
-        catch (DeploymentException e) {
+        } catch (DeploymentException e) {
             PDFirma.loguearExcepcion(e, "ERROR_026");
             JOptionPane.showMessageDialog(PDFirma.ffirma,
-                                          PDFirma.resourceBundle.getString("TXT_ERRORENFIRMADORDIGITAL") + "\n" +
-                                          PDFirma.resourceBundle.getString("ERROR_026"), 
-                                                          "ERROR",        
-                                                          JOptionPane.ERROR_MESSAGE);
-        } 
-        catch (Exception e){
+                    PDFirma.resourceBundle.getString("TXT_ERRORENFIRMADORDIGITAL") + "\n" +
+                            PDFirma.resourceBundle.getString("ERROR_026"),
+                    "ERROR",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
             PDFirma.loguearExcepcion(e, "ERROR_050");
             JOptionPane.showMessageDialog(PDFirma.ffirma,
-                                          PDFirma.resourceBundle.getString("TXT_ERRORENFIRMADORDIGITAL") + "\n" +
-                                          PDFirma.resourceBundle.getString("ERROR_050"), 
-                                                          "ERROR",        
-                                                          JOptionPane.ERROR_MESSAGE);
+                    PDFirma.resourceBundle.getString("TXT_ERRORENFIRMADORDIGITAL") + "\n" +
+                            PDFirma.resourceBundle.getString("ERROR_050"),
+                    "ERROR",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void stopServer() {
         PDFirma.ffirma.dispose();
-            this.stop();
-            System.out.println("Se detiene servidor de WebSocket - Detiene el funcionamiento del Firmador Digital");
-            System.exit(0);
+        this.stop();
+        System.out.println("Se detiene servidor de WebSocket - Detiene el funcionamiento del Firmador Digital");
+        System.exit(0);
     }
-    
+
 }

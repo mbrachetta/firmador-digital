@@ -1,25 +1,15 @@
 package gob.firmadordigital.update;
 
 import gob.firmadordigital.PDFirma;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.swing.JProgressBar;
-
 import jupar.objects.Instruction;
 import jupar.objects.Modes;
 import jupar.parsers.UpdateXMLParser;
-
 import org.xml.sax.SAXException;
+
+import javax.swing.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Updater {
 
@@ -49,8 +39,8 @@ public class Updater {
             PDFirma.ffirma.setjProgressBarUpdate((++contador_procesados) * 100 / cant_archivos);
         }
     }
-    
-    public void update(JProgressBar jprogressbar,String instructionsxml, String tmp, String dstdir, Modes mode, String proxyHost, int proxyPort, String usuarioProxy, String passwordProxy) throws SAXException,
+
+    public void update(JProgressBar jprogressbar, String instructionsxml, String tmp, String dstdir, Modes mode, String proxyHost, int proxyPort, String usuarioProxy, String passwordProxy) throws SAXException,
             FileNotFoundException, IOException, InterruptedException {
 
         UpdateXMLParser parser = new UpdateXMLParser();
@@ -64,10 +54,10 @@ public class Updater {
             instruction = (Instruction) iterator.next();
             switch (instruction.getAction()) {
                 case MOVE:
-                    copy(tmp + File.separator + instruction.getFilename(), dstdir+File.separator+instruction.getDestination());
+                    copy(tmp + File.separator + instruction.getFilename(), dstdir + File.separator + instruction.getDestination());
                     break;
                 case DELETE:
-                    delete(dstdir+File.separator+instruction.getDestination());
+                    delete(dstdir + File.separator + instruction.getDestination());
                     break;
                 case EXECUTE:
                     Runtime.getRuntime().exec("java -jar " + tmp + File.separator + instruction.getFilename());
@@ -81,10 +71,9 @@ public class Updater {
         File srcfile = new File(source);
         File dstfile = new File(destination);
         if (dstfile.isDirectory()) {
-        	dstfile = new File(destination + File.separator + srcfile.getName());
-        }
-        else{
-            if (dstfile.getParentFile()!=null && !dstfile.getParentFile().exists()){
+            dstfile = new File(destination + File.separator + srcfile.getName());
+        } else {
+            if (dstfile.getParentFile() != null && !dstfile.getParentFile().exists()) {
                 dstfile.getParentFile().mkdirs();
             }
         }
