@@ -3,12 +3,10 @@ package gob.firmadordigital.gui;
 import gob.firmadordigital.PDFirma;
 import gob.firmadordigital.pfdr.IdentidadRemota;
 
-import java.awt.Component;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import java.awt.*;
 
 public class IdentidadesRemotasCellRenderer extends DefaultTreeCellRenderer {
 

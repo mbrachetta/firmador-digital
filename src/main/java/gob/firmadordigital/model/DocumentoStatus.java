@@ -1,46 +1,46 @@
 package gob.firmadordigital.model;
 
 public class DocumentoStatus {
-	
-	private Integer ndoc;
-	private Boolean status;
-	private String errorcode;
-	
-	
-	public DocumentoStatus(int ndoc, boolean status, String errorcode) {
-		this.ndoc = ndoc;
-		this.status = status;
-		this.errorcode = errorcode;
-	}
+
+    private Integer ndoc;
+    private Boolean status;
+    private String errorcode;
 
 
-	public Integer getNdoc() {
-		return ndoc;
-	}
+    public DocumentoStatus(int ndoc, boolean status, String errorcode) {
+        this.ndoc = ndoc;
+        this.status = status;
+        this.errorcode = errorcode;
+    }
 
 
-	public void setNdoc(int ndoc) {
-		this.ndoc = ndoc;
-	}
+    public Integer getNdoc() {
+        return ndoc;
+    }
 
 
-	public Boolean isStatus() {
-		return status;
-	}
+    public void setNdoc(int ndoc) {
+        this.ndoc = ndoc;
+    }
 
 
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
+    public Boolean isStatus() {
+        return status;
+    }
 
 
-	public String getErrorcode() {
-		return errorcode;
-	}
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
 
-	public void setErrorcode(String errorcode) {
-		this.errorcode = errorcode;
-	}
+    public String getErrorcode() {
+        return errorcode;
+    }
+
+
+    public void setErrorcode(String errorcode) {
+        this.errorcode = errorcode;
+    }
 }
 

@@ -13,15 +13,11 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    // iText
+    // iText 7.2.5 - dependencia de BouncyCastle 1.70
     implementation 'com.itextpdf:kernel:7.2.5'
     implementation 'com.itextpdf:layout:7.2.5'
     implementation 'com.itextpdf:sign:7.2.5'
     implementation 'com.itextpdf:pdfa:7.2.5'
-
-    // BouncyCastle
-    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
-    implementation 'org.bouncycastle:bcpkix-jdk15on:1.70'
 
     // Gson
     implementation 'com.google.code.gson:gson:2.10.1'
@@ -50,10 +46,6 @@ dependencies {
     implementation 'commons-io:commons-io:2.15.1'
     implementation 'commons-logging:commons-logging:1.3.0'
     implementation 'commons-validator:commons-validator:1.7'
-
-    //MIT CLib
-    implementation files('libs/MITyCLibAPI-1.0.4.jar')
-    implementation files('libs/MITyCLibCert-1.0.4.jar')
 
     //Jupar
     implementation files('libs/jupar.jar')
