@@ -8,6 +8,7 @@ import gob.firmadordigital.gui.IdentidadesRemotasSerializer;
 import gob.firmadordigital.pfdr.IdentidadRemota;
 import gob.firmadordigital.websocket.WebSocketServerEndpoint;
 import jakarta.websocket.DeploymentException;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.glassfish.tyrus.server.Server;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.PrintStream;
 import java.net.*;
+import java.security.Security;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -80,6 +82,11 @@ public class PDFirma {
             /* Calcula la fecha y hora actual para que se agregue al filelog en cada mensaje que se registre */
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             fecha_fileLog = dateFormat.format(new Date());
+
+            /* agrega el proveedor criptografico de BouncyCastle */
+            if (Security.getProvider("BC") == null) {
+                Security.addProvider(new BouncyCastleProvider());
+            }
 
             String version = System.getProperty("java.version");
             filelog.println("JRE version: " + System.getProperty("java.version"));

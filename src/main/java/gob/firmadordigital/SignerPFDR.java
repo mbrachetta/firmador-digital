@@ -26,14 +26,14 @@ import java.nio.charset.StandardCharsets;
 /* Implementa la firma remota de un documento, tomando el Certificado
  * de la PFDR del Ministerio de Modernizacion */
 
-public class PDFSignerPFDR extends PDFSigner {
+public class SignerPFDR extends Signer {
 
     private IdentidadRemota identidadremota;
     private String pin;
     private String otp;
     private String url_firmadorPFDR;
 
-    public PDFSignerPFDR(IdentidadRemota identidad, String pin, String otp, ThreadFirma hilo) {
+    public SignerPFDR(IdentidadRemota identidad, String pin, String otp, ThreadFirma hilo) {
         super(hilo);
         this.identidadremota = identidad;
         this.pin = pin;

@@ -56,14 +56,15 @@ public class ThreadFirma extends Thread {
     private int contador_recibidos = 0;
     private int contador_procesados = 0;
     private int contador_enviados = 0;
-    private PDFSigner pdfsigner;
+    private Signer signer;
 
 
     /* Constructor para un hilo de firmas locales */
-    public ThreadFirma(Certificate[] cert, PrivateKey privkey, ImageData img_estampaFirma, WebSocketServerEndpoint wsse) {
+    public ThreadFirma(Certificate[] chain, PrivateKey privkey, ImageData img_estampaFirma, WebSocketServerEndpoint wsse) {
         super("ThreadFirma");
         this.wsse = wsse;
-        pdfsigner = new PDFSignerLocal(cert, privkey, img_estampaFirma, this);
+
+        signer = new SignerLocal(chain, privkey, img_estampaFirma, this);
     }
 
     /* Constructor para un hilo de firmas remotas */
@@ -77,7 +78,7 @@ public class ThreadFirma extends Thread {
         String otp = otpPinDialog.getOTP();
         if (!pin.isEmpty() && !otp.isEmpty()) {
             this.wsse = wsse;
-            pdfsigner = new PDFSignerPFDR(identidad, pin, otp, this);
+            signer = new SignerPFDR(identidad, pin, otp, this);
         } else {
             throw new CanceloFirmaException(PDFirma.resourceBundle.getString("TXT_PROCESODEFIRMACANCELADO"));
         }
@@ -277,7 +278,7 @@ public class ThreadFirma extends Thread {
                                 /* Se firma el documento y se agrega a la cola de documentos a enviar
                                  * para que sean enviados a la url de callback definida por el organismo */
                                 CompletableFuture.supplyAsync(() -> {
-                                            return pdfsigner.firmar(documentoAFirmar);
+                                            return signer.firmar(documentoAFirmar);
                                         }, executor_firmador)
                                         .thenAccept(documentoFirmado -> {
                                             if (documentoFirmado != null) {
