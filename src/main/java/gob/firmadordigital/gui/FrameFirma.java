@@ -41,7 +41,7 @@ public class FrameFirma extends JFrame {
     //Todo verificar las excepciones que no he manejado bien  luego de la refactorización en los métodos de esta clase.
     private static KeyStore ks;
     private List<Certificate[]> signCertificates;
-    private Certificate[] certificate;
+    private Certificate[] chain;
     private PrivateKey key;
 
     /* Datos relevantes que son usados luego por el firmador cuando se va
@@ -98,9 +98,6 @@ public class FrameFirma extends JFrame {
 
         this.getKestore();
         
-        /* Descomentar para levantar los Certificados del Token directamente 
-        this.getKeystore_pkcs11(); */
-
         DefaultTableModel tabla_certsModel = new DefaultTableModel(getFilas(), getColumnas());
         tabla_certsModel.fireTableDataChanged();
 
@@ -212,21 +209,21 @@ public class FrameFirma extends JFrame {
                 if (tipo_certificado.compareTo("local") == 0) {
                     /* Si se esta trabajando con un certificado en keystore local */
                     // Obtener la cadena de certificación completa directamente
-                    certificate = signCertificates.get(fila_seleccionada);
+                    chain = signCertificates.get(fila_seleccionada);
 
                     // El primer certificado de la cadena es el del firmante
-                    X509Certificate cert = (X509Certificate) certificate[0];
+                    X509Certificate cert = (X509Certificate) chain[0];
 
                     // Obtener la clave privada asociada al certificado (ahora por cadena)
-                    key = obtenerClavePrivada(certificate);
+                    key = obtenerClavePrivada(chain);
 
                     /* Se verifica que se haya escogido un certificado, que tenga clave privada asociada y que no este fuera de su fecha de vigencia */
-                    if (cert != null && key != null && certificate != null && certificate.length > 0) {
+                    if (cert != null && key != null && chain != null && chain.length > 0) {
 
                         /* Se verifica caducidad del Certificado */
                         if (verificarCertificado(cert)) {
                             /* Inicia un hilo de firma local */
-                            ThreadFirma firmaseleccionados = new ThreadFirma(certificate, key, wsse.getImagen_Estampa(), wsse);
+                            ThreadFirma firmaseleccionados = new ThreadFirma(chain, key, wsse.getImagen_Estampa(), wsse);
                             firmaseleccionados.setPriority(Thread.MIN_PRIORITY);
                             firmaseleccionados.start();
                         }
